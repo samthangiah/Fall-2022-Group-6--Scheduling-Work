@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
 	
-	@RequestMapping("/Email")
+	@RequestMapping("/email")
 	public String email() {
 		return "email.html";
 	}
 	
-	@RequestMapping("/emailissue")
+	@RequestMapping("/email_issue")
 	public String emailissue() {
-		return "emailissue.html";
+		return "email_issue.html";
 	}
 	
 	@RequestMapping("/computer")
@@ -21,17 +21,23 @@ public class UserController {
 		return "computer.html";
 	}
 	
-	@RequestMapping("/socomputer")
-	public String socomputer() {
-		return "socomputer.html";
+	@RequestMapping("/software_computer")
+	public String software_computer() {
+		return "software_computer.html";
 	}
 	
-	@RequestMapping("/Campuse")
+	@RequestMapping("/campus")
 	public String campus() {
-		return "Campuse.html";
+		return "campus.html";
+		
 	}
 	@RequestMapping("/Display_name_change")
 	public String displaync() {
 		return "Display_name_change.html";
+	}
+	
+	@RequestMapping("/request_name_change")
+	public String requestnc() {
+		return "request_name_change.html";
 	}
 }
