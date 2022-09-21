@@ -40,4 +40,24 @@ public class UserController {
 	public String requestnc() {
 		return "request_name_change.html";
 	}
+	
+	@RequestMapping("/comp_lapt_tabl_support")
+	public String cltSupport() {
+		return "comp_lapt_tabl_support.html";
+	}
+	
+	@RequestMapping("/comp_hardware_issue")
+	public String compHardware() {
+		return "comp_hardware_issue.html";
+	}
+	
+	@RequestMapping("/pc")
+	public String pc() {
+		return "pc.html";
+	}
+	
+	@RequestMapping("/pc_submit_incident")
+	public String pcSubmit() {
+		return "pc_submit_incident.html";
+	}
 }
