@@ -1,5 +1,5 @@
 <!doctype HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <style>
 body {margin-left:40px; margin-bottom: 60px}
@@ -11,7 +11,7 @@ select {width: 250px; height: 30px}
 <title>Request Name Change</title>
 <body>
 <h1 style="color:darkgreen; font-family:sans-serif">Submit A Request</h1>
-<form action="#" th:action="@{/save}" th:object="${incident}" method="post">
+<form>
 <label for="instructions">Submission Instructions</label><br>
 <textarea style="resize:none; font-family: sans-serif" readonly id="instructions" name="instructions" rows="8" cols="70">
 Requester= Person who needs the service
@@ -20,21 +20,27 @@ CC= The person other than the requester who should receive notifications
 Building/Room= Location where the work is to be completed
 </textarea><br>
 <label for="users">Request User *</label><br>
-<input type="text" th:field="*{User}" style="height:25px; width:242px"/><br>
+<select name="users" id="users">
+<option value="choice"></option>
+</select><br>
 <label for="contact_phone">Contact Phone *</label><br>
-<input type="text" th:field="*{Phone}" style="height:25px; width:242px"/><br>
+<input type="text" id="contact_phone" name="contact_phone" style="height:25px; width:242px"><br>
 <label for="cc">CC</label><br>
-<input type="text" th:field="*{CC}" style="height:25px; width: 242px"/><br>
+<input type="text" id="cc" name="cc" style="height:25px; width: 242px"><br>
 <label for="department">SRU Department *</label><br>
-<input type="text" th:field="*{Department}" style="height:25px; width: 242px"/><br>
+<select name="department" id="department">
+<option value="dep_choice">Please Select an Option</option>
+</select><br>
 <label for="building">Building</label><br>
-<input type="text" th:field="*{Building}" style="height:25px; width: 242px"/><br>
+<select name="building" id="building">
+<option value="build_choice">Please Select an Option</option>
+</select><br>
 <label for="room">Room</label><br>
 <select name="room" id="room">
 <option value="room_choice">Select Room</option>
 </select><br>
 <label for="request_subj">Subject of Request *</label><br>
-<input type="text" th:field="*{Subject}" style="height:25px; width: 242px"/><br>
+<input type="text" id="request_subj" name="request_subj" style="height:25px; width:491px"><br>
 <label for="description">Description *</label><br>
 <textarea style="resize:none; font-family: sans-serif" id="description" name="description" rows="8" cols="70"></textarea><br>
 <input type="submit" style="height:35px; width:80px; margin-top:15px">

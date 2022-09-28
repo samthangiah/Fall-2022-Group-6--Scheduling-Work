@@ -8,16 +8,20 @@ select {width: 250px; height: 30px}
 </style>
 </head>
 <meta charset="utf-8">
-<title>Request Name Change</title>
+<title>Submit PC Incident</title>
 <body>
-<h1 style="color:darkgreen; font-family:sans-serif">Submit A Request</h1>
+<h1 style="color:darkgreen; font-family:sans-serif">Submit PC Incident</h1>
 <form action="#" th:action="@{/save}" th:object="${incident}" method="post">
 <label for="instructions">Submission Instructions</label><br>
-<textarea style="resize:none; font-family: sans-serif" readonly id="instructions" name="instructions" rows="8" cols="70">
-Requester= Person who needs the service
-Contact Phone= Phone number of the person who needs the service
+<textarea style="resize:none; font-family: sans-serif" readonly id="instructions" name="instructions" rows="12" cols="70">
+Requester= Person who is experiencing the problem
+Contact Phone= Phone number of the person who is experiencing the problem
 CC= The person other than the requester who should receive notifications
-Building/Room= Location where the work is to be completed
+Building/Room= Location where the issue is happening
+
+Please Provide a complete description of the issue, include the computer name and the error message received whenever possible.
+    
+Computer name can be found on the desktop(above the date and time) or by typing "computer name" using the search icon. The computer name is shown next to the Device name.
 </textarea><br>
 <label for="users">Request User *</label><br>
 <input type="text" th:field="*{User}" style="height:25px; width:242px"/><br>

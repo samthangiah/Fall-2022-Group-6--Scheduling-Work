@@ -87,7 +87,10 @@ public class WorkOrderController {
 		}
 		
 		@RequestMapping("/request_name_change")
-		public String requestnc() {
+		public String requestNC(Model model) {
+			incident incident = new incident();
+			model.addAttribute("incident", incident);
+			
 			return "request_name_change.html";
 		}
 		@RequestMapping("/admin")
@@ -97,5 +100,22 @@ public class WorkOrderController {
 		@RequestMapping("/index")
 		public String index() {
 			return "index.html";
+		}
+		@RequestMapping("/comp_hardware_issue")
+		public String compIssue() {
+			return "comp_hardware_issue.html";
+		}
+		
+		@RequestMapping("/comp_lapt_tabl_support")
+		public String compSupport() {
+			return "comp_lapt_tabl_support.html";
+		}
+		
+		@RequestMapping("/pc_submit_incident")
+		public String pcIncident(Model model) {
+			incident incident = new incident();
+			model.addAttribute("incident", incident);
+			
+			return "pc_submit_incident.html";
 		}
 }
