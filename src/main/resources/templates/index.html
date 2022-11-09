@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Work Order System</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="topside">
+<div class="systemname">Work Order System</div>
+<div class="toprightside">
+<div class="accmenu"> 
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input class="signinbutton" type="submit" value="Sign Out" />
+        </form>
+    </div>
+</div>
+</div>
+<div class="main">
+<div class="Catalog">
+Service Catalog
+</div>
+</div>
+<div class="alltap">
+<div class="firsttap">
+<button class="select-button"onclick="location.href='/computer'">
+<h4>Computer</h4>
+<div class="subtitle">Report technology issues in a classroom, lab or meeting something.
+</div>
+</button>
+<button class="select-button"onclick="location.href='/email'">
+<h4>Email</h4>
+<div class="subtitle">Report email issues.
+</div>
+</button>
+<button class="select-button"onclick="location.href='/software_computer'">
+<h4>Computer,Software</h4>
+<div class="subtitle">Report issues, request quotes and installations for computers, software printers, and devices.
+</div>
+</button>
+</div>
+<div class="secondtap">
+<button class="select-button"onclick="location.href='/campus'">
+<h4>Campus Wide Application</h4>
+<div class="subtitle">Administrative application Banner,BDMS,Citrix,Degree Audit,MySRU,Office365.
+</div>
+</button>
+<button class="select-button">
+<h4>WiFi & Network</h4>
+<div class="subtitle">Need to report a problem with a network connection.
+</div>
+</button>
+<button class="select-button">
+<h4>Telephones & Fax</h4>
+<div class="subtitle">Report telephone and fax issues, request telephone services.
+</div>
+</button>
+</div>
+<div class="thirdtap">
+<button class="select-button">
+<h4>Reports,Data Request</h4>
+<div class="subtitle">Request data,reports,course evaluations and scantron test scoring.
+</div>
+</button>
+<button class="select-button">
+<h4>Server,Storage</h4>
+<div class="subtitle">Request network drive access,server change, and database changes.
+</div>
+</button>
+<button class="select-button"onclick="location.href='/UserAccounts'">
+<h4>User Accounts</h4>
+<div class="subtitle">Login assistance,request account name changes and guest access.
+</div>
+</button>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+.topside {
+height: 70px;
+border-bottom: 2px solid black;
+display:flex;
+align-items: center;
+font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+.systemname{
+margin-left: 20px;
+font-size:35px;
+}
+.accmenu{
+font-size: 15px;
+margin-right: auto;
+
+}
+.signinlabel{
+text-align: center;
+}
+.toprightside{
+display:flex;
+margin-left:auto;
+}
+.topside{
+margin-left: 10px;
+}
+.toprightside{
+margin-right:20px;
+}
+.logintopside{
+margin-left: 20px;
+text-align: center;
+}
+.logintoprightside{
+margin-right:10px;
+}
+.main{
+margin:center;
+text-align:center;
+}
+.center {
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  border: black;
+  padding: 50px;
+}
+.Catalog{
+font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+font-size: 20px;
+font-style: italic;
+margin:center;
+text-align:center;
+}
+.firsttap{
+margin: auto;
+display:flex;
+}
+.loginfirsttap{
+margin-left:10px;
+display: flex;
+vertical-align: middle;
+text-align: center;
+}
+.secondtap{
+margin: center;
+display: flex;
+text-align:center;
+}
+.thirdtap{
+margin: right;
+display: flex;
+text-align:center;
+}
+.subtitle{
+font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+font-size: 14px;
+line-height: 1.42857;
+color: #787878;
+}
+.select-button{
+width:420px;
+height:200px;
+margin:40px;
+text-align:center;
+background-color:transparent;
+background-image:none;
+border-color:teal;
+border-radius: 10px;
+cursor:pointer;
+}
+.loginselect-button{
+margin: auto;
+text-align:center;
+background-color:white;
+background-image:none;
+border-color: blue;
+border-radius: 10px;
+cursor:pointer;
+}
+.submit-button{
+text-align:center;
+}
+.alltap{
+border-radius: 10px;
+border: 4px ridge #bcbcbc;
+}
+.dropzone{
+	max-width:200px;
+	height: 200px;
+	padding: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 500;
+	font-size:20px;
+	cursor: pointer;
+	color: #cccccc;
+	border: 4px dashed;
+	border-radius: 10px;
+	}
+
+	label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}
+form {
+  border: 3px solid #f1f1f1;
+}
+.signinbutton {
+  background-color: teal;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}

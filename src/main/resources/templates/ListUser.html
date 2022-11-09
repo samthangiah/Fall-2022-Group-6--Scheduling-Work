@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>List User</title>
+</head>
+
+<body>
+<div align="center">
+    <h1>Incident List</h1>
+    <br/><br/>
+  <table border="1">
+        <thead>
+            <tr>
+            <th>ID</th>
+                <th>User</th>
+                <th>Phone</th>
+                <th>CC</th>
+                <th>Department</th>
+                <th>Building</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>/</th>
+                <th>Select</th>
+                <th>Assigned Tech User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="incident : ${listincidents}">     
+                <td th:text="|${incident.id}}|">ID</td>
+                <td th:text="|${incident.User}|">User</td>
+                <td th:text="|${incident.Phone}|">Phone</td>
+                <td th:text="|${incident.CC}|">CC</td>
+                <td th:text="|${incident.Department}|">Department</td>
+                <td th:text="|${incident.Building}|">Building</td>
+                <td th:text="|${incident.Subject}|">Subject</td>
+                 <td th:text="|${incident.setdate}|">Date</td>
+             <td>
+                	<a th:href="|@{'/edit/' + ${incident.id}}|">Edit</a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/delete/' + ${incident.id}}">Delete</a>
+                </td>
+                <td><a th:href="@{'/assign/' + ${incident.id}}">Assign</a></td>
+                <td><a th:text="${incident.user_id}"></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="select-button"onclick="location.href='/admin'">
+<h4>Home</h4>
+<div>Admin page
+</div>
+</button>
+<a th:href = "@{/export}">Export to CSV</a>
+</div>  
+</body>
+</html>
