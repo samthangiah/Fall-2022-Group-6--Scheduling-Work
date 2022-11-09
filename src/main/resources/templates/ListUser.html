@@ -21,9 +21,8 @@
                 <th>Building</th>
                 <th>Subject</th>
                 <th>Date</th>
-                <th>/</th>
-                <th>Select</th>
                 <th>Assigned Tech User</th>
+                <th>Tech ID</th>
             </tr>
         </thead>
         <tbody>
@@ -36,13 +35,9 @@
                 <td th:text="|${incident.Building}|">Building</td>
                 <td th:text="|${incident.Subject}|">Subject</td>
                  <td th:text="|${incident.setdate}|">Date</td>
-             <td>
-                	<a th:href="|@{'/edit/' + ${incident.id}}|">Edit</a>
-                	&nbsp;&nbsp;&nbsp;
-                	<a th:href="@{'/delete/' + ${incident.id}}">Delete</a>
-                </td>
                 <td><a th:href="@{'/assign/' + ${incident.id}}">Assign</a></td>
                 <td><a th:text="${incident.user_id}"></a></td>
+                <td><a th:href="@{'/delete/' + ${incident.id}}">Delete</a>
             </tr>
         </tbody>
     </table>
@@ -53,5 +48,12 @@
 </button>
 <a th:href = "@{/export}">Export to CSV</a>
 </div>  
+<form   action ="uploadFile" method = "POST" enctype = "multipart/form-data">
+      <br /> <br />
+         Please select a file to upload : 
+         <input type = "file" name = "file" value = "Browse File" /> <br /> <br />
+               
+         <a href="saveData"><b>Upload</b></a> &nbsp; &nbsp; <a href="/"></a>
+      </form>
 </body>
 </html>
