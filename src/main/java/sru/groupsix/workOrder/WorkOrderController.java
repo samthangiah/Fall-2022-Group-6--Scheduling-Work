@@ -36,16 +36,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import sru.groupsix.workOrder.Incident.IExcelDataService;
+import sru.groupsix.workOrder.Incident.IFileUploaderService;
+import sru.groupsix.workOrder.Incident.IncidentRepository;
 import sru.groupsix.workOrder.Incident.IncidentService;
 import sru.groupsix.workOrder.Incident.incident;
 import sru.groupsix.workOrder.User.User;
 import sru.groupsix.workOrder.User.UserRepository;
-
 @Controller
 public class WorkOrderController {
 
@@ -255,6 +257,41 @@ public class WorkOrderController {
 				model.addAttribute("techIncidents", techIncidents);				
 				return mav;
 			}
-		 
+		 @Autowired
+			IFileUploaderService fileService;
+			
+			@Autowired
+			IExcelDataService excelservice;
+			
+			@Autowired
+			IncidentRepository repo1;
+			
+		
+		  
 
-}
+		    @PostMapping("/uploadFile")
+		    public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+
+		        fileService.uploadFile(file);
+
+		        redirectAttributes.addFlashAttribute("message",
+		            "You have successfully uploaded '"+ file.getOriginalFilename()+"' !");
+		        try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        return "redirect:/";
+		    }
+		    
+		    @GetMapping("/saveData")
+		    public String saveExcelData(Model model) {
+		    	
+		    	List<incident> excelDataAsList = excelservice.getExcelDataAsList();
+		    	int noOfRecords = excelservice.saveExcelData(excelDataAsList);
+		    	model.addAttribute("noOfRecords",noOfRecords);
+		    	return "success";
+		    }
+		}
+
