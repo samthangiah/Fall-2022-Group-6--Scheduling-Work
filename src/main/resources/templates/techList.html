@@ -3,14 +3,28 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
-<title>List User</title>
+<title>Tech Incidents</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
 </head>
+<body>
+<div class="topside">
+<div class="systemname">Work Order System / Assigned Incidents</div>
+<div class="toprightside">
+<div class="accmenu"> 
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome "<b>[[${#request.userPrincipal.principal.fullName}]]</b>"
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+</div>
+</div>
 
 <body>
 <div align="center">
-    <h1>Assigned Incidents For "<b>[[${#request.userPrincipal.principal.fullName}]]</b>"</h1>
-    <br/><br/>
-  <table border="1">
+    <h1 style="font-family: Arial">Assigned Incidents For "<b>[[${#request.userPrincipal.principal.fullName}]]</b>"</h1>
+  <table class="table-style">
         <thead>
             <tr>
             <th>ID</th>
@@ -21,13 +35,12 @@
                 <th>Building</th>
                 <th>Subject</th>
                 <th>Date</th>
-                <th>/</th>
                 <th>Assigned Tech User</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="incident : ${techIncidents}">     
-                <td th:text="|${incident.id}}|">ID</td>
+                <td th:text="|${incident.id}|">ID</td>
                 <td th:text="|${incident.User}|">User</td>
                 <td th:text="|${incident.Phone}|">Phone</td>
                 <td th:text="|${incident.CC}|">CC</td>
@@ -35,19 +48,12 @@
                 <td th:text="|${incident.Building}|">Building</td>
                 <td th:text="|${incident.Subject}|">Subject</td>
                 <td th:text="|${incident.setdate}|">Date</td>
-             <td>
-                	<a th:href="|@{'/edit/' + ${incident.id}}|">Edit</a>
-                	&nbsp;&nbsp;&nbsp;
-                	<a th:href="@{'/delete/' + ${incident.id}}">Delete</a>
-                </td>
-                <td><a th:text="${incident?.user_id}"></a></td>
+                <td><a th:text=|"${user.email}"|></a></td>
             </tr>
         </tbody>
     </table>
-    <button class="select-button"onclick="location.href='/techAssist'">
-<h4>Home</h4>
-<div>Technical Assistant Page
-</div>
+    <button class="nav-button" onclick="location.href='/techAssist'">
+<h3>Tech Assistant Main</h3>
 </button>
 </body>
 </html>

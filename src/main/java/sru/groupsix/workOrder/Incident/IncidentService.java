@@ -28,4 +28,8 @@ public class IncidentService {
 	public void delete(long id) {
 		repo.deleteById(id);
 	}
+	
+	public void saveAll(List<incident> listincident) {
+		repo.saveAll(listincident);
+	}
 }

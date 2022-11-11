@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Edit List</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="topside">
+<div class="systemname">Work Order System / Edit Incident List</div>
+<div class="toprightside">
+<div class="accmenu"> 
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome [ADMIN] 
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+</div>
+</div>
+<body>
+    <div align="center">
+    <h1 style="font-family: Arial">Edit Incident List</h1>
+        <form action="#" class="form-horizontal" th:action="@{/saveList}" th:object="${form}" method="post">
+        <table class="table-style">
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> User </th>
+            <th> Phone </th>
+            <th> CC </th>
+            <th> Department </th>
+            <th> Building </th>
+            <th> Subject </th>
+            <th> Date </th>
+            <th> Assigned Tech User </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="inc, itemStat : ${form.incList}">
+				<td><input size="5" readonly th:name="|incList[${itemStat.index}].id|" th:value="${inc.getId()}"/></td>
+                <td><input size="15" th:name="|incList[${itemStat.index}].User|" th:value="${inc.getUser()}"/></td>
+                <td><input size="15" th:name="|incList[${itemStat.index}].Phone|" th:value="${inc.getPhone()}"/></td>
+                <td><input size="15" th:name="|incList[${itemStat.index}].CC|" th:value="${inc.getCC()}"/></td>
+                <td><input size="15" th:name="|incList[${itemStat.index}].Department|" th:value="${inc.getDepartment()}"/></td>
+                <td><input size="15" th:name="|incList[${itemStat.index}].Building|" th:value="${inc.getBuilding()}"/></td>
+                <td><input size="15" th:name="|incList[${itemStat.index}].Subject|" th:value="${inc.getSubject()}"/></td>
+                <td><input size="15" th:name="|incList[${itemStat.index}].setdate|" th:value="${inc.getSetdate()}"/></td>
+                <td><select th:name="|incList[${itemStat.index}].user_id|">
+                    <option th:value="null"><p>Unassigned</p></option>
+    				<option th:each="techUsers : ${techUsers}" th:text="${techUsers.email}" th:selected="${techUsers.id == inc.getUser_id()}" th:value="${techUsers.id}" ></option>
+    			</select></td>
+        </tr>
+    </tbody>
+</table>
+<button class="save-list-button" th:onclick="|window.location.href='@{/saveList}'|">
+<h3>Save</h3>
+</button>
+<button class="cancel-button" onclick="location.href='/listOfInc'">
+<h3>Cancel</h3>
+</button>
+        </form>
+    </div>
+</body>
+</html>

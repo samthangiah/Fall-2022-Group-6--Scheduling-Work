@@ -45,6 +45,7 @@ import sru.groupsix.workOrder.Incident.IExcelDataService;
 import sru.groupsix.workOrder.Incident.IFileUploaderService;
 import sru.groupsix.workOrder.Incident.IncidentRepository;
 import sru.groupsix.workOrder.Incident.IncidentService;
+import sru.groupsix.workOrder.Incident.IncidentWrapper;
 import sru.groupsix.workOrder.Incident.incident;
 import sru.groupsix.workOrder.User.User;
 import sru.groupsix.workOrder.User.UserRepository;
@@ -55,6 +56,8 @@ public class WorkOrderController {
 	private IncidentService service; 
 	@Autowired
 	private UserRepository repo;
+	@Autowired
+	private IncidentWrapper form;
 
 		@RequestMapping("/email")
 		public String email() {
@@ -293,5 +296,50 @@ public class WorkOrderController {
 		    	model.addAttribute("noOfRecords",noOfRecords);
 		    	return "success";
 		    }
-		}
+		    
+		    @GetMapping("listOfIncidents")
+			 public String showAll(Model model) {
+			     model.addAttribute("incList", service.listAll());
+			     List<User> listUsers = repo.findAll();
+					model.addAttribute("listUsers", listUsers);
+					List<User> techUsers = repo.findAll();
+					techUsers.clear();
+					for (int i = 0; i < listUsers.size(); i++) {
+						if (listUsers.get(i).getRole().equals("TECHASSIST")) {
+							techUsers.add(listUsers.get(i));
+							}
+					}
+					model.addAttribute("techUsers", techUsers);	
+			     return "listOfInc";
+			 }
+			
+			@GetMapping(value = "/editList")
+		    public String showEditForm(Model model) {
+		        List<incident> incList = new ArrayList<>();
+		        service.listAll().iterator().forEachRemaining(incList::add);
+		        
+		        List<User> listUsers = repo.findAll();
+				model.addAttribute("listUsers", listUsers);
+				List<User> techUsers = repo.findAll();
+				techUsers.clear();
+				for (int i = 0; i < listUsers.size(); i++) {
+					if (listUsers.get(i).getRole().equals("TECHASSIST")) {
+						techUsers.add(listUsers.get(i));
+						}
+				}
+				model.addAttribute("techUsers", techUsers);	
 
+		        model.addAttribute("form", new IncidentWrapper(incList));
+
+		        return "editList";
+		    }
+			
+			@PostMapping(value = "/saveList")
+		    public String saveBooks(@ModelAttribute IncidentWrapper form, Model model) {
+				
+				service.saveAll(form.getIncList());
+		        model.addAttribute("incList", service.listAll());
+
+		        return "redirect:listOfIncidents";
+		    }
+	}

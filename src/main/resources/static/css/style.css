@@ -138,3 +138,76 @@ form {
   margin: 4px 2px;
   cursor: pointer;
 }
+.table-style {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 400px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.table-style thead tr {
+	background-color: MediumSeaGreen;
+	color: #ffffff
+	text-align: left;
+}
+.table-style th, .table-style td {
+	padding: 12px 15px;
+}
+.table-style tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+.table-style tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+.table-style tbody tr:last-of-type {
+	border-bottom: 2px solid MediumSeaGreen;
+}
+.nav-button {
+	border-radius: 6px;
+	background-color: Gainsboro;
+	border: 1px Solid Gainsboro;
+	transition-duration: 0.2s;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.nav-button:hover {
+	background-color: MediumSeaGreen;
+}
+.save-list-button {
+	border-radius: 6px;
+	background-color: Gainsboro;
+	border: 1px Solid Gainsboro;
+	transition-duration: 0.2s;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+.save-list-button:hover {
+	background-color: SkyBlue;
+}
+.cancel-button {
+	border-radius: 6px;
+	background-color: Gainsboro;
+	border: 1px Solid Gainsboro;
+	transition-duration: 0.2s;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.cancel-button:hover {
+	background-color: #FF4433;
+}
+.delete-button {
+	border-radius: 6px;
+	background-color: Gainsboro;
+	border: 1px Solid Gainsboro;
+	transition-duration: 0.2s;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.delete-button:hover {
+	background-color: #FF4433;
+}
