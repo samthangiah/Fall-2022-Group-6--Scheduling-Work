@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>List User</title>
+</head>
+<body>
+<div align="center">
+    <h1>Assign Tech User</h1>
+    <br/><br/>
+    <form action="#" th:action="@{/assigntech}" th:object="${incident}"
+			method="post">
+
+			<table border="0" cellpadding="10">
+					<input type="hidden" th:field="*{id}" readonly="readonly" />
+					<input type="hidden" th:field="*{User}" />
+					<input type="hidden" th:field="*{Phone}" style="height:25px; width:242px"/>
+					<input type="hidden" th:field="*{CC}" style="height:25px; width: 242px"/>
+					<input type="hidden" th:field="*{Department}" />
+					<input type="hidden" th:field="*{Building}" style="height:25px; width:491px"/>
+					<input type="hidden" th:field="*{Subject}" style="height:25px; width:491px"/>
+					<input type="hidden" th:field="*{setdate}" style="height:25px; width:491px"/>
+				<tr>
+					<td>Tech User:</td>
+					<td><select name="tech" id="techUsers" th:field="*{user_id}">
+    	<option th:each="techUsers : ${techUsers}" th:text="${techUsers.email}" th:value="${techUsers.id}"></option>
+    	</select></td>
+				</tr>
+									
+				<tr>
+					<td colspan="2"><button type="submit">Save</button> </td>
+				</tr>
+			</table>
+		</form>
+</div>    
+</body>
+</html>

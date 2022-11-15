@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">>
+<head>
+<meta charset="utf-8">
+<title> User incident List</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<style>
+table{
+margin-left:auto;
+margin-right:auto;
+}
+</style>
+<body>
+<div class="topside">
+<div class="systemname">Work Order System</div>
+<div class="toprightside">
+<div class="accmenu"> 
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome [[${#request.userPrincipal.principal.fullName}]]
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+</div>
+</div>
+<body>
+    <div align="center">
+    <h1 style="font-family: Arial">Incident List</h1>
+        <table class="table-style">
+       <thead>
+        <tr>
+            <th> ID </th>
+            <th> User </th>
+            <th> Phone </th>
+            <th> CC </th>
+            <th> Department </th>
+            <th> Building </th>
+            <th> Subject </th>
+            <th> Date </th>
+            <th> technician assigned: </th>
+             <th> technician Notes: </th>
+        </tr>
+    </thead>
+    <tbody>
+             <tr th:each="inc : ${incList}">
+            <td><span th:text="${inc.id}"> ID </span></td>
+            <td><span th:text="${inc.User}"> User </span></td>
+            <td><span th:text="${inc.Phone}"> Phone </span></td>
+            <td><span th:text="${inc.CC}"> CC </span></td>
+            <td><span th:text="${inc.Department}"> Department </span></td>
+            <td><span th:text="${inc.Building}"> Building </span></td>
+            <td><span th:text="${inc.Subject}"> Subject </span></td>
+            <td><span th:text="${inc.setdate}"> Date </span></td>
+            <td><span th:each="techUsers : ${techUsers}" th:if="${inc.user_id == techUsers.id}" th:text="${techUsers.email}"> Tech User </span></td>
+            <td><span th:text="${inc.tech_notes}"> Tech Notes </span></td>
+        </tbody>
+        
+    </table>
+    <button onclick="location.href='/index'"> Back To Main Page</button>
+</div>
+
+</body>
+</html>

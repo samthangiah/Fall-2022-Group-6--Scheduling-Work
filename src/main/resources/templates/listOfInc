@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>List User</title>
+</head>
+<body>
+    <div align="center">
+    <h1>Incident List</h1>
+    <br/><br/>
+        <table>
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> User </th>
+            <th> Phone </th>
+            <th> CC </th>
+            <th> Department </th>
+            <th> Building </th>
+            <th> Subject </th>
+            <th> Date </th>
+            <th> Assigned Tech User </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="inc : ${incList}">
+            <td><span th:text="${inc.id}"> ID </span></td>
+            <td><span th:text="${inc.User}"> User </span></td>
+            <td><span th:text="${inc.Phone}"> Phone </span></td>
+            <td><span th:text="${inc.CC}"> CC </span></td>
+            <td><span th:text="${inc.Department}"> Department </span></td>
+            <td><span th:text="${inc.Building}"> Building </span></td>
+            <td><span th:text="${inc.Subject}"> Subject </span></td>
+            <td><span th:text="${inc.setdate}"> Date </span></td>
+            <td><span th:text="${inc.user_id}"> Tech User </span></td>
+        </tr>
+    </tbody>
+</table>
+    </div>
+    <div class="col-md-6" align="center">
+			<a class="btn btn-primary" href="#" th:href="@{/editList}"> Edit Incidents </a>
+		</div>
+</body>
+</html>
