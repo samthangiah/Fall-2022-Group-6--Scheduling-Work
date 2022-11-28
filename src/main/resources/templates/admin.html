@@ -12,7 +12,7 @@
 <div class="accmenu"> 
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome [ADMIN] 
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
             </p>
             <input type="submit" value="Sign Out" />
         </form>
@@ -30,6 +30,14 @@ Service Catalog
 <div class="firsttap">
 <button class="select-button"onclick="location.href='/listOfIncidents'">
 <h4>Incident List</h4>
+<div class="subtitle">Display a list of Incidents that can be assigned to a technical user, modified, or deleted
+</div>
+</button>
+<div class="secondtap">
+<button class="select-button"onclick="location.href='/adminRegister'">
+<h4>Register</h4>
+<div class="subtitle">Register a new Admin / Technical Assistant / User
+</div>
 </button>
 </div>
 </div>

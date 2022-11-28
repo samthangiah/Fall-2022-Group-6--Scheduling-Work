@@ -23,6 +23,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +50,9 @@ import sru.groupsix.workOrder.Incident.IncidentService;
 import sru.groupsix.workOrder.Incident.IncidentWrapper;
 import sru.groupsix.workOrder.Incident.incident;
 import sru.groupsix.workOrder.User.User;
+import sru.groupsix.workOrder.User.UserDetailService;
 import sru.groupsix.workOrder.User.UserRepository;
+import sru.groupsix.workOrder.User.Userdetail;
 @Controller
 public class WorkOrderController {
 
@@ -142,8 +146,12 @@ public class WorkOrderController {
 		 }
 		
 		@RequestMapping("/new")
-		public String showNewIncidentPage(Model model) {
+		public String showNewIncidentPage(@AuthenticationPrincipal Userdetail details, Model model) {
+			SimpleDateFormat today = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
 			incident incident = new incident();
+			incident.setSetdate(today.format(date));
+			incident.setUser(details.getUsername());
 			model.addAttribute("incident", incident);
 			
 			return "newIncident";
@@ -190,6 +198,22 @@ public class WorkOrderController {
 			return "registersuccess";
 			
 		}
+		@GetMapping("/adminRegister")
+		public String showAdminRegister(Model model) {
+			model.addAttribute("user",new User());
+			
+			return "adminRegister";
+		}
+		@PostMapping("/admin_register")
+		public String adminRegistration(User user) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		    String encodedPassword = passwordEncoder.encode(user.getPassword());
+		    user.setPassword(encodedPassword);
+		     
+			repo.save(user);
+			return "admin";
+			
+		}
 		@GetMapping("/list_users")
 		public String viewuserlist(Model model) {
 			List<User> listUsers = repo.findAll();
@@ -225,33 +249,6 @@ public class WorkOrderController {
 			 csvWriter.close();
 		 }
 		 
-		 @RequestMapping("/assign/{id}")
-		 public ModelAndView showAssignTechPage(@PathVariable(name = "id") int id, Model model) {
-				ModelAndView mav = new ModelAndView("assign_tech");
-				incident incident = service.get(id);
-				mav.addObject("incident", incident);
-				List<incident> listincidents = service.listAll();
-				model.addAttribute("listincidents", listincidents);
-				List<User> listUsers = repo.findAll();
-				model.addAttribute("listUsers", listUsers);
-				List<User> techUsers = repo.findAll();
-				techUsers.clear();
-				for (int i = 0; i < listUsers.size(); i++) {
-					if (listUsers.get(i).getRole().equals("TECHASSIST")) {
-						techUsers.add(listUsers.get(i));
-						}
-				}
-				model.addAttribute("techUsers", techUsers);
-				
-				return mav;
-			}
-		 
-		 @RequestMapping(value = "/assigntech", method = RequestMethod.POST)
-			public String assignTech(@ModelAttribute("incident") incident incident) {
-				service.save(incident);
-				
-				return "admin";
-			}
 		 @RequestMapping("/techListPage/{id}")
 		 public ModelAndView techListPage(@PathVariable(name = "id") Long id, Model model) {
 				ModelAndView mav = new ModelAndView("techList");
@@ -269,6 +266,7 @@ public class WorkOrderController {
 				model.addAttribute("techIncidents", techIncidents);				
 				return mav;
 			}
+			
 		 @Autowired
 			IFileUploaderService fileService;
 			
@@ -352,11 +350,18 @@ public class WorkOrderController {
 		        return "redirect:listOfIncidents";
 		        
 		    }
-			@GetMapping(value = "/TecheditList")
-		    public String showEditForm1(Model model) {
+			@GetMapping(value = "/TecheditList/{id}")
+		    public ModelAndView showEditForm1(@PathVariable(name = "id") Long id, Model model) {
+				ModelAndView mav = new ModelAndView("TecheditList");
+				User user = repo.getById(id);
+		        List<incident> tempList = new ArrayList<>();
+		        service.listAll().iterator().forEachRemaining(tempList::add);
 		        List<incident> incList = new ArrayList<>();
-		        service.listAll().iterator().forEachRemaining(incList::add);
-		        
+		        for (int i = 0; i < tempList.size(); i++) {
+		        	if (tempList.get(i).getUser_id() == user.getId()) {
+		        		incList.add(tempList.get(i));
+		        	}
+		        }
 		        List<User> listUsers = repo.findAll();
 				model.addAttribute("listUsers", listUsers);
 				List<User> techUsers = repo.findAll();
@@ -367,10 +372,10 @@ public class WorkOrderController {
 						}
 				}
 				model.addAttribute("techUsers", techUsers);	
-
+				model.addAttribute(user);
 		        model.addAttribute("form", new IncidentWrapper(incList));
 
-		        return "TecheditList";
+		        return mav;
 		    }
 			
 			@PostMapping(value = "/TechsaveList")
@@ -381,4 +386,22 @@ public class WorkOrderController {
 
 		        return "techAssist";
 		    }
+			@RequestMapping("/userSubmitList/{id}")
+			 public ModelAndView userSumbitListPage(@PathVariable(name = "id") Long id, Model model) {
+					ModelAndView mav = new ModelAndView("userSubmitList");
+					User user = repo.getById(id);
+					mav.addObject("user", user);
+					List<incident> listincidents = service.listAll();
+					model.addAttribute("listincidents", listincidents);
+					List<incident> userIncidents = service.listAll();
+					userIncidents.clear();
+					for (int i = 0; i < listincidents.size(); i++) {
+						if (listincidents.get(i).getUser().equals(user.getEmail())) {
+							userIncidents.add(listincidents.get(i));
+						}
+					}
+					model.addAttribute("userIncidents", userIncidents);	
+					
+					return mav;
+				}
 	}

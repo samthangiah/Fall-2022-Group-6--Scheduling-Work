@@ -13,7 +13,7 @@
 <div class="accmenu"> 
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome [ADMIN] 
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
             </p>
             <input type="submit" value="Sign Out" />
         </form>
@@ -42,25 +42,27 @@
         <tr th:each="inc, itemStat : ${form.incList}">
 				<td><input size="5" readonly th:name="|incList[${itemStat.index}].id|" th:value="${inc.getId()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].User|" th:value="${inc.getUser()}"/></td>
-                <td><input size="15" th:name="|incList[${itemStat.index}].Phone|" th:value="${inc.getPhone()}"/></td>
+                <td><input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="ex. 111-111-1111" size="15" th:name="|incList[${itemStat.index}].Phone|" th:value="${inc.getPhone()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].CC|" th:value="${inc.getCC()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].Department|" th:value="${inc.getDepartment()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].Building|" th:value="${inc.getBuilding()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].Subject|" th:value="${inc.getSubject()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].setdate|" th:value="${inc.getSetdate()}"/></td>
+                <td hidden><input size="15"  th:name="|incList[${itemStat.index}].tech_notes|" th:value="${inc.getTech_notes()}"/></td>
                 <td><select th:name="|incList[${itemStat.index}].user_id|">
                     <option th:value="null"><p>Unassigned</p></option>
-					<option th:each="techUsers : ${techUsers}" th:text="${techUsers.email}" th:selected="${techUsers.id == inc.getUser_id()}" th:value="${techUsers.id}" ></option>    			</select></td>
+					<option th:each="techUsers : ${techUsers}" th:text="${techUsers.email}" th:selected="${techUsers.id == inc.getUser_id()}" th:value="${techUsers.id}" ></option>
+					</select></td>
         </tr>
     </tbody>
 </table>
 <button class="save-list-button" th:onclick="|window.location.href='@{/saveList}'|">
 <h3>Save</h3>
 </button>
-<button class="cancel-button" onclick="location.href='/listOfInc'">
+    </form>
+<button class="cancel-button" th:onclick="|window.location.href='@{/listOfIncidents}'|">
 <h3>Cancel</h3>
 </button>
-        </form>
     </div>
 </body>
 </html>

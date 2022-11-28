@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Sign Up - CodeJava</title>
-     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<meta charset="utf-8"/>
+<title>Edit List</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div class="registrationtab">
-<div>
-<h1>User - Registration - sign up</h1> 
+<div class="topside">
+<div class="systemname">Work Order System / Register</div>
+<div class="toprightside">
+<div class="accmenu"> 
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
 </div>
+</div>
+<body>
+    <div align="center">
+    <h1 style="font-family: Arial">Register A New Account</h1>
 <form th:action="@{/process_register}" th:object="${user}"
             method="post" style="max-width: 600px; margin: 0 auto;">
 
@@ -48,6 +60,8 @@
                 <div class="in-label">
                     <select th:field="*{role}">
                     <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="TECHASSIST">Technical Assistant</option>
                     </select>
                 </div>
             </div>
@@ -58,5 +72,6 @@
         </div>
 </form>
 </div>
+</body>
 </body>
 </html>

@@ -29,16 +29,16 @@ Date = Person who completes the service (example* month/day)
 			<tr>
 			<tr>
 					<td> Date:</td>
-					<td><input type="text" th:field="*{setdate}" /></td>
+					<td><input type="text" readonly th:field="*{setdate}" /></td>
 				</tr>
 					
 				<tr>
 					<td> User:</td>
-					<td><input type="text" th:field="*{User}" /></td>
+					<td><input type="text" readonly th:field="*{User}" /></td>
 				</tr>
 				<tr>
 					<td>Phone:</td>
-					<td><input type="text" th:field="*{Phone}" style="height:25px; width:242px"/></td>
+					<td><input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="ex. 111-111-1111" th:field="*{Phone}" style="height:25px; width:242px"/></td>
 				</tr>
 				<tr>
 					<td>CC:</td>
@@ -64,7 +64,10 @@ Date = Person who completes the service (example* month/day)
 				<tr>
 					<td>Subject:</td>
 					<td><input type="text" th:field="*{Subject}" style="height:25px; width:491px"/></td>
-				</tr>								
+				</tr>
+				<tr>
+					<td hidden><input type="text" name="tech_notes" value="PENDING" style="height:25px; width:491px"/></td>
+				</tr>							
 				<tr>
 					<td colspan="2"><button type="submit">Save</button> </td>
 				</tr>

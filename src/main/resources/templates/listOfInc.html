@@ -13,7 +13,7 @@
 <div class="accmenu"> 
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome [ADMIN] 
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
             </p>
             <input type="submit" value="Sign Out" />
         </form>
@@ -34,6 +34,7 @@
             <th> Building </th>
             <th> Subject </th>
             <th> Date </th>
+            <th> Status </th>
             <th> Assigned Tech User </th>
             <th>Delete</th>
         </tr>
@@ -48,7 +49,11 @@
             <td><span th:text="${inc.Building}"> Building </span></td>
             <td><span th:text="${inc.Subject}"> Subject </span></td>
             <td><span th:text="${inc.setdate}"> Date </span></td>
-            
+            <td>
+                	<span style="color:Orange;" th:if="${inc.tech_notes == 'PENDING'}">PENDING REVIEW</span>
+                	<span style="color:DeepSkyBlue;" th:if="${inc.tech_notes == 'OPEN'}">OPEN</span>
+                	<span style="color:MediumSeaGreen;" th:if="${inc.tech_notes == 'CLOSED'}">CLOSED</span>
+                </td>
             <td><span th:each="techUsers : ${techUsers}" th:if="${inc.user_id == techUsers.id}" th:text="${techUsers.email}"> Tech User </span></td>
             <td><button class="delete-button" th:onclick="|window.location.href='@{'/delete/' + ${inc.id}}'|">Delete</button></td>
         </tr>

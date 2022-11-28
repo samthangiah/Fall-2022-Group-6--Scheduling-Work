@@ -13,7 +13,7 @@
 <div class="accmenu"> 
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome [ADMIN] 
+                Welcome "<b>[[${#request.userPrincipal.principal.fullName}]]</b>"
             </p>
             <input type="submit" value="Sign Out" />
         </form>
@@ -35,34 +35,38 @@
             <th> Building </th>
             <th> Subject </th>
             <th> Date </th>
-            <th> Tech Notes </th>
+            <th> Status </th>
             <th> Assigned Tech User </th>
         </tr>
     </thead>
     <tbody>
         <tr th:each="inc, itemStat : ${form.incList}">
-				<td><input size="5" readonly th:name="|incList[${itemStat.index}].id|" th:value="${inc.getId()}"/></td>
+				<td><input size="3" readonly th:name="|incList[${itemStat.index}].id|" th:value="${inc.getId()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].User|" th:value="${inc.getUser()}"/></td>
-                <td><input size="15" th:name="|incList[${itemStat.index}].Phone|" th:value="${inc.getPhone()}"/></td>
+                <td><input size="10" th:name="|incList[${itemStat.index}].Phone|" th:value="${inc.getPhone()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].CC|" th:value="${inc.getCC()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].Department|" th:value="${inc.getDepartment()}"/></td>
-                <td><input size="15" th:name="|incList[${itemStat.index}].Building|" th:value="${inc.getBuilding()}"/></td>
+                <td><input size="12" th:name="|incList[${itemStat.index}].Building|" th:value="${inc.getBuilding()}"/></td>
                 <td><input size="15" th:name="|incList[${itemStat.index}].Subject|" th:value="${inc.getSubject()}"/></td>
-                <td><input size="15" th:name="|incList[${itemStat.index}].setdate|" th:value="${inc.getSetdate()}"/></td>
-                 <td><input size="15" th:name="|incList[${itemStat.index}].tech_notes|" th:value="${inc.getTech_notes()}"/></td>
-                <td><select th:name="|incList[${itemStat.index}].user_id|">
-                    <option th:value="null"><p>Unassigned</p></option>
-					<option th:each="techUsers : ${techUsers}" th:text="${techUsers.email}" th:selected="${techUsers.id == inc.getUser_id()}" th:value="${techUsers.id}" ></option>    			</select></td>
+                <td><input size="8" th:name="|incList[${itemStat.index}].setdate|" th:value="${inc.getSetdate()}"/></td>
+                
+                <td><select th:name="|incList[${itemStat.index}].tech_notes|">
+                    <option th:selected="${inc.getTech_notes() == 'PENDING'}" th:value="PENDING"><p>PENDING</p></option>
+					<option th:selected="${inc.getTech_notes() == 'OPEN'}" th:value="OPEN"><p>OPEN</p></option>
+					<option th:selected="${inc.getTech_notes() == 'CLOSED'}" th:value="CLOSED"><p>CLOSED</p></option>
+					</select></td>
+                <td hidden><input size="15" hidden th:name="|incList[${itemStat.index}].user_id|" th:text="${user.email}" th:value="${user.id}"/></td>
+                <td><a th:text="|${user.email}|"></a></td>
         </tr>
     </tbody>
 </table>
 <button class="save-list-button" th:onclick="|window.location.href='@{/TechsaveList}'|">
 <h3>Save</h3>
 </button>
-<button class="cancel-button" onclick="location.href='/listOfInc'">
+    </form>
+<button class="cancel-button" th:onclick="|window.location.href='@{'/techListPage/' + ${#request.userPrincipal.principal.getId}}'|">
 <h3>Cancel</h3>
 </button>
-        </form>
     </div>
 </body>
 </html>

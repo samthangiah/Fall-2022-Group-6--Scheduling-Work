@@ -9,7 +9,11 @@
 <div class="topside">
 <div class="systemname">Work Order System</div>
 <div class="toprightside">
-<div class="accmenu"> 
+<button class="nav-button" th:onclick="|window.location.href='@{'/userSubmitList/' + ${#request.userPrincipal.principal.getId}}'|">
+<h4>My Incidents</h4>
+</button>
+<div class="accmenu">
+ 
         <form th:action="@{/logout}" method="post">
             <p>
                 Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
