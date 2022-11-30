@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="ISO-8859-1">
+    <title>Welcome to WorkOrder System</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<div class="logintopside">
+<div class="systemname">Work Order System</div>
+<div class="toprightside">
+</div>
+</div>
+    <div class="center">
+      <form class="signinlabel" method="post" action="/login">
+        <h2 class="signinlabel">Sign In</h2>
+        <p>
+          <label for="username" class="signinlabel">Username</label>
+          <input type="text" id="username" name="email" class="signinlabel" placeholder="Username" required autofocus>
+        </p>
+        <p>
+          <label for="password" class="signinlabel">Password</label>
+          <input type="password" id="password" name="password" class="signinlabel" placeholder="Password" required>
+         
+        </p>
+         <input name="_csrf" type="hidden" value="cc43d4e1-b2b8-435e-a146-932f93f40531" />
+        <button class="signinbutton" type="submit">Sign in</button>
+   <button class="signinbutton"onclick="location.href='/register'">Register</button>
+</form>
+</div>
+</body>
+</html>
+
+ 
