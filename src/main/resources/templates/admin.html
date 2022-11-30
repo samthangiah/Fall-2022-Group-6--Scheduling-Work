@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Admin</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="topside">
+<div class="systemname">Work Order System / Admin Main Menu</div>
+<div class="toprightside">
+<div class="accmenu"> 
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+</div>
+</div>
+<body>
+
+<div class="main">
+<div class="Catalog">
+Service Catalog
+</div>
+</div>
+<div class="alltap">
+<div class="firsttap">
+<button class="select-button"onclick="location.href='/listOfIncidents'">
+<h4>Incident List</h4>
+<div class="subtitle">Display a list of Incidents that can be assigned to a technical user, modified, or deleted
+</div>
+</button>
+<div class="secondtap">
+<button class="select-button"onclick="location.href='/adminRegister'">
+<h4>Register</h4>
+<div class="subtitle">Register a new Admin / Technical Assistant / User
+</div>
+</button>
+</div>
+</div>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>List Of Incidents</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="topside">
+<div class="systemname">Work Order System / Incident List</div>
+<div class="toprightside">
+<div class="accmenu"> 
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+</div>
+</div>
+<body>
+    <div align="center">
+    <h1 style="font-family: Arial">Incident List</h1>
+        <table class="table-style">
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> User </th>
+            <th> Phone </th>
+            <th> CC </th>
+            <th> Department </th>
+            <th> Building </th>
+            <th> Subject </th>
+            <th> Date </th>
+            <th> Status </th>
+            <th> Assigned Tech User </th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="inc : ${incList}">
+            <td><span th:text="${inc.id}"> ID </span></td>
+            <td><span th:text="${inc.User}"> User </span></td>
+            <td><span th:text="${inc.Phone}"> Phone </span></td>
+            <td><span th:text="${inc.CC}"> CC </span></td>
+            <td><span th:text="${inc.Department}"> Department </span></td>
+            <td><span th:text="${inc.Building}"> Building </span></td>
+            <td><span th:text="${inc.Subject}"> Subject </span></td>
+            <td><span th:text="${inc.setdate}"> Date </span></td>
+            <td>
+                	<span style="color:Orange;" th:if="${inc.tech_notes == 'PENDING'}">PENDING REVIEW</span>
+                	<span style="color:DeepSkyBlue;" th:if="${inc.tech_notes == 'OPEN'}">OPEN</span>
+                	<span style="color:MediumSeaGreen;" th:if="${inc.tech_notes == 'CLOSED'}">CLOSED</span>
+                </td>
+            <td><span th:each="techUsers : ${techUsers}" th:if="${inc.user_id == techUsers.id}" th:text="${techUsers.email}"> Tech User </span></td>
+            <td><button class="delete-button" th:onclick="|window.location.href='@{'/delete/' + ${inc.id}}'|">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+<button class="nav-button" onclick="location.href='/admin'">
+<h3>Admin Page</h3>
+</button>
+<button class="nav-button" th:onclick="|window.location.href='@{/editList}'|">
+<h3>Edit Incidents</h3>
+</button>
+<button class="nav-button" th:onclick="|window.location.href='@{/export}'|">
+<h3>Export To CSV</h3>
+</button>
+</div>  
+<form   action ="uploadFile" method = "POST" enctype = "multipart/form-data">
+      <br /> <br />
+         Please select a file to upload : 
+         <input type = "file" name = "file" value = "Browse File" /> <br /> <br />
+               
+         <a href="saveData"><b>Upload</b></a> &nbsp; &nbsp; <a href="/"></a>
+      </form>
+    </div>
+    
+</body>
+</html>
